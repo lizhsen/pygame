@@ -5,6 +5,7 @@ import pygame
 from ship import Ship
 import game_functions as gf
 from pygame.sprite import Group
+from alien import Alien
 
 
 def run_game():
@@ -16,12 +17,16 @@ def run_game():
     ship = Ship(ai_setting, screen)
     # 创建一个子弹编组
     bullets = Group()
+    # 创建一个外星人编组
+    aliens = Group()
+    # 创建外星人群
+    gf.create_fleet(ai_setting, screen, aliens)
 
     while True:
         gf.check_events(ai_setting, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_setting, screen, ship, bullets)
+        gf.update_screen(ai_setting, screen, ship, aliens, bullets)
 
 
 run_game()
